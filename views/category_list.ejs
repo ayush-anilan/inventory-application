@@ -1,0 +1,18 @@
+<%- include('pages/layout') %>
+    <div class="col-sm-10 border">
+        <ul>
+            <h1>
+                <%= title %>
+            </h1>
+            <% category_list.forEach(function (item){ %>
+                <li>
+                    <strong>
+                        <%= item.name %>
+                    </strong>
+                    <p>
+                        <%= item.description %>
+                    </p>
+                </li>
+                <% }); %>
+        </ul>
+    </div>

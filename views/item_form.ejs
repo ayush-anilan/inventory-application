@@ -1,0 +1,27 @@
+<%- include('pages/layout') %>
+    <h1>Create Item</h1>
+    <form action="">
+        <div class="form-group">
+            <label for="name">Item Name</label>
+            <input type="text" name="category-name" placeholder="Category Name" id="">
+            <br>
+            <label for="category">Category</label>
+            <select name="category" id="">
+                <option value="">--Please select an author--</option>
+                <option value="">Mobiles</option>
+                <option value="">Electronics</option>
+                <option value="">Home & Kitchen</option>
+                <option value="">Apparel</option>
+            </select>
+            <br>
+            <label for="description">Description</label>
+            <input type="text" name="category-description" placeholder="Description" id="">
+            <br>
+            <label for="price">Price</label>
+            <input type="number" name="category-price" placeholder="price of the item" id="">
+            <br>
+            <label for="number_in_stock">Number in Stock</label>
+            <input type="number" name="category-stock" placeholder="stock" id="">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
