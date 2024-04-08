@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const Category = require("../models/categories");
 const Items = require("../models/items");
 const asyncHandler = require("express-async-handler");
@@ -29,3 +30,17 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 exports.category_create_get = (req, res, next) => {
   res.render("category_form", { title: "Create Category" });
 };
+
+// Handle category create on POST
+exports.category_create_post = [
+  async (req, res, next) => {
+    const name = req.body.category_name;
+    const description = req.body.category_description;
+    await Category.create({ name: name, description: description });
+    const data = await Category.find({}, "name description");
+    res.render("category_list", {
+      title: "Category List",
+      category_list: data,
+    });
+  },
+];
