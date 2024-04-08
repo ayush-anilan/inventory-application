@@ -12,6 +12,8 @@ router.get("/", category_controller.index);
 router.get("/categories", category_controller.category_list);
 router.get("/categories/create", category_controller.category_create_get);
 router.post("/categories/create", category_controller.category_create_post);
+router.get("/categories/:id/delete", category_controller.category_delete_get);
+router.get("/categories/:id/delete", category_controller.category_delete_post);
 
 // Items routes
 router.get("/items", items_controller.items_list);
