@@ -1,24 +1,29 @@
 <%- include('pages/layout') %>
-    <div>
-        <h2>
-            <%= title %>: <%= category.name %>
-        </h2>
-        <h4>Items</h4>
-        <ul>
-            <% items.forEach(function (item) { %>
-                <li><a href="">
-                        <%= item.name %>
-                    </a>
-                </li>
-                <p>
-                    <%= item.description %>
-                </p>
-                <% }) %>
-        </ul>
-        <form action="" method="post">
-            <div class="form-group">
-                <input type="hidden" name="categoryid">
-                <button type="submit" class="btn btn-primary">Delete</button>
+    <div class="col-sm-10 border">
+        <h1>
+            Delete: <%= category.name %>
+        </h1>
+        <% if(items.length> 0) { %>
+            <p><strong>Delete the following items before attempting to delete this category</strong></p>
+            <div class="col-sm-10">
+                <h4>Items</h4>
+                <ul>
+                    <% items.forEach((item)=> { %>
+                        <li>
+                            <%= item.name %>
+                        </li>
+                        <p>
+                            <%= item.description %>
+                        </p>
+                        <% }) %>
+                </ul>
             </div>
-        </form>
+            <% } else { %>
+                <p>Do you really want to delete this category</p>
+                <% } %>
+
+                    <form action="" method="post">
+                        <input type="text" name="categoryid" id="categoryid" value="<%=category._id %>">
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </form>
     </div>

@@ -1,0 +1,9 @@
+<%- include('pages/layout') %>
+    <h1>Delete <%= item.name %>
+    </h1>
+    <p>Do you really want to delete this item</p>
+
+    <form action="" method="post">
+        <input type="text" name="itemid" id="itemid" value="<%= item._id %>">
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>

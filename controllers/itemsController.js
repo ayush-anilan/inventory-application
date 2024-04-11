@@ -11,6 +11,14 @@ exports.items_list = asyncHandler(async (req, res, next) => {
   res.render("items_list", { title: "Items List", items_list: allItems });
 });
 
+// GET request for one item
+exports.item_detail = asyncHandler(async (req, res, next) => {
+  const [items] = await Promise.all([Items.findById(req.params.id).exec()]);
+  res.render("item_detail", {
+    items: items,
+  });
+});
+
 // Handle item create on GET
 exports.item_create_get = asyncHandler(async (req, res, next) => {
   const categories = await Categories.find({}, "name");
@@ -39,3 +47,54 @@ exports.item_create_post = [
     res.render("items_list", { title: "Items List", items_list: data });
   },
 ];
+
+// Handle item delete on GET
+exports.item_delete_get = asyncHandler(async (req, res, next) => {
+  const [items] = await Promise.all([Items.findById(req.params.id).exec()]);
+  res.render("item_delete", {
+    item: items,
+  });
+});
+
+// Handle item delete on POST
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+  const [items] = await Promise.all([Items.findById(req.params.id).exec()]);
+  await Items.findByIdAndDelete(req.body.itemid);
+  res.redirect("/shop/items");
+});
+
+// Handle item update on GET
+exports.item_update_get = asyncHandler(async (req, res, next) => {
+  const [item, categories] = await Promise.all([
+    Items.findById(req.params.id).populate("category").exec(),
+    Categories.find({}, "name").exec(),
+  ]);
+
+  if (item === null) {
+    const err = new Error("Item not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("item_form", {
+    title: "Update Item",
+    categories: categories,
+    item: item,
+  });
+});
+
+// Handle item update on POST
+exports.item_update_post = asyncHandler(async (req, res, next) => {
+  const item = new Items({
+    name: req.body.item_name,
+    description: req.body.item_description,
+    category: req.body.category,
+    price: req.body.item_price,
+    number_in_stock: req.body.item_stock,
+  });
+
+  res.render("item_form", {
+    title: "Update items",
+    items: item,
+  });
+});

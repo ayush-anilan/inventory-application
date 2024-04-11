@@ -1,9 +1,11 @@
 <%- include('pages/layout') %>
-    <h1>Create Item</h1>
+    <h1>
+        <%= title %>
+    </h1>
     <form action="" method="post">
         <div class="form-group">
             <label for="name">Item Name</label>
-            <input type="text" name="item_name" placeholder="Item Name" id="">
+            <input type="text" name="item_name" placeholder="Item Name" id="" value="<%= item.name %>">
             <br>
             <label for="category">Category</label>
             <select name="category" id="">
@@ -16,13 +18,13 @@
             </select>
             <br>
             <label for="description">Description</label>
-            <input type="text" name="item_description" placeholder="Description" id="">
+            <input type="text" name="item_description" id="<%= item._id %>" value="<%= item.description %>">
             <br>
             <label for="price">Price</label>
-            <input type="number" name="item_price" placeholder="price of the item" id="">
+            <input type="text" name="item_price" placeholder="price of the item" id="" value="<%= item.price %>">
             <br>
             <label for="number_in_stock">Number in Stock</label>
-            <input type="number" name="item_stock" placeholder="stock" id="">
+            <input type="text" name="item_stock" placeholder="stock" id="" value="<%= item.number_in_stock %>">
         </div>
         <button type="submit">Submit</button>
     </form>

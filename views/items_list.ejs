@@ -6,9 +6,11 @@
             </h1>
             <% items_list.forEach(function (item){ %>
                 <li>
-                    <strong>
-                        <%= item.name %>
-                    </strong>
+                    <a href="items/<%=item.id %>">
+                        <strong>
+                            <%= item.name %>
+                        </strong>
+                    </a>
                     <p>
                         <%= item.description %>
                     </p>
@@ -19,8 +21,8 @@
                     <p>Number in stock: <%= item.number_in_stock %>
                     </p>
                 </li>
-                <button>Delete</button>
-                <button>Update</button>
+                <!-- <button>Delete</button>
+                <button>Update</button> -->
                 <% }); %>
         </ul>
     </div>
