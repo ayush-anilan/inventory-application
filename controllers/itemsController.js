@@ -21,8 +21,17 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 
 // Handle item create on GET
 exports.item_create_get = asyncHandler(async (req, res, next) => {
-  const categories = await Categories.find({}, "name");
-  res.render("item_form", { title: "Create Item", categories: categories });
+  const [item, categories] = await Promise.all([
+    Items.find({}, "name description category price number_in_stock")
+      .populate("category")
+      .exec(),
+    Categories.find({}, "name").exec(),
+  ]);
+  res.render("item_form", {
+    title: "Create Item",
+    categories: categories,
+    item: item,
+  });
 });
 
 // Handle item create on POST
@@ -44,7 +53,7 @@ exports.item_create_post = [
       {},
       "name description category price number_in_stock"
     );
-    res.render("items_list", { title: "Items List", items_list: data });
+    res.redirect("/shop/items");
   },
 ];
 
@@ -85,16 +94,22 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 
 // Handle item update on POST
 exports.item_update_post = asyncHandler(async (req, res, next) => {
+  const itemName = req.body.item_name;
+  const description = req.body.item_description;
+  const category = req.body.item_category;
+  const itemPrice = req.body.item_price;
+  const itemStock = req.body.item_stock;
+  const itemId = req.params.id;
+
   const item = new Items({
-    name: req.body.item_name,
-    description: req.body.item_description,
-    category: req.body.category,
-    price: req.body.item_price,
-    number_in_stock: req.body.item_stock,
+    name: itemName,
+    description: description,
+    category: category,
+    price: itemPrice,
+    number_in_stock: itemStock,
+    _id: req.params.id,
   });
 
-  res.render("item_form", {
-    title: "Update items",
-    items: item,
-  });
+  await Items.findByIdAndUpdate(req.params.id, item, {});
+  res.redirect("/shop/items");
 });

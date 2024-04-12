@@ -24,5 +24,6 @@ router.get("/items/:id", items_controller.item_detail);
 router.get("/items/:id/delete", items_controller.item_delete_get);
 router.post("/items/:id/delete", items_controller.item_delete_post);
 router.get("/items/:id/update", items_controller.item_update_get);
+router.post("/items/:id/update", items_controller.item_update_post);
 
 module.exports = router;

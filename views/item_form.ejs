@@ -8,10 +8,10 @@
             <input type="text" name="item_name" placeholder="Item Name" id="" value="<%= item.name %>">
             <br>
             <label for="category">Category</label>
-            <select name="category" id="">
+            <select name="" id="">
                 <option value="">Please select the category</option>
                 <% categories.forEach((item,index)=> {%>
-                    <option value="<%= item._id %>">
+                    <option name="item_category" value="<%= item._id %>">
                         <%=item.name %>
                     </option>
                     <% });%>
