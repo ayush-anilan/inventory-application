@@ -17,6 +17,7 @@
     "express-async-handler": "^1.2.0",
     "express-validator": "^7.0.1",
     "http-errors": "~1.6.3",
+    "inventory-application": "file:",
     "mongoose": "^8.3.0",
     "morgan": "~1.9.1"
   },
